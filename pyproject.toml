@@ -1,0 +1,5 @@
+[project]
+name = "automl-experiment-framework"
+version = "0.1.0"
+description = "AutoML Experimentation Pipeline"
+requires-python = ">=3.10"
