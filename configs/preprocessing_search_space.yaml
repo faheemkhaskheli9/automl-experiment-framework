@@ -1,0 +1,57 @@
+# Example preprocessing search space for the AutoML experimentation pipeline.
+#
+# Slots are applied in the order listed. The optimizer (Phase 2) picks one
+# candidate per slot -- or skips the slot when `optional: true` -- and samples
+# the listed hyperparameters. This file is loaded by:
+#
+#   python -m src.main show-preprocessing --config configs/preprocessing_search_space.yaml
+#
+# Datasets and estimators referenced here are all public / open-source.
+preprocessing:
+  slots:
+    - name: imputation
+      optional: false
+      candidates:
+        - name: simple
+          estimator: sklearn.impute.SimpleImputer
+          params:
+            strategy:
+              choices: [mean, median, most_frequent]
+        - name: knn
+          estimator: sklearn.impute.KNNImputer
+          params:
+            n_neighbors:
+              low: 3
+              high: 15
+
+    - name: scaling
+      optional: true
+      candidates:
+        - name: standard
+          estimator: sklearn.preprocessing.StandardScaler
+        - name: minmax
+          estimator: sklearn.preprocessing.MinMaxScaler
+        - name: robust
+          estimator: sklearn.preprocessing.RobustScaler
+
+    - name: categorical_encoding
+      optional: false
+      candidates:
+        - name: onehot
+          estimator: sklearn.preprocessing.OneHotEncoder
+          params:
+            handle_unknown:
+              choices: [ignore, infrequent_if_exist]
+        - name: ordinal
+          estimator: sklearn.preprocessing.OrdinalEncoder
+
+    - name: feature_selection
+      optional: true
+      candidates:
+        - name: select_k_best
+          estimator: sklearn.feature_selection.SelectKBest
+          params:
+            k:
+              low: 5
+              high: 50
+              log: true
