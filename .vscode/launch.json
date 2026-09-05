@@ -15,6 +15,19 @@
       "cwd": "${workspaceFolder}"
     },
     {
+      "name": "AutoML: show model search space",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.main",
+      "args": [
+        "show-models",
+        "--config",
+        "configs/model_search_space.yaml"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
       "name": "AutoML: pytest",
       "type": "debugpy",
       "request": "launch",

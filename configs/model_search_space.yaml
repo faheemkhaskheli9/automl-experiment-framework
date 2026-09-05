@@ -1,0 +1,45 @@
+# Example model search space for the AutoML experimentation pipeline.
+#
+# Each candidate names a model_family from the MODEL_REGISTRY
+# (src/model_search_space.py) plus the hyperparameters the optimizer (Phase 2)
+# will sample over. This file is loaded by:
+#
+#   python -m src.main show-models --config configs/model_search_space.yaml
+#
+models:
+  - name: rf_default
+    model_family: random_forest
+    params:
+      n_estimators:
+        low: 50
+        high: 500
+      max_depth:
+        choices: [3, 5, 10, null]
+
+  - name: gb_default
+    model_family: gradient_boosting
+    params:
+      n_estimators:
+        low: 50
+        high: 300
+      learning_rate:
+        low: 0.01
+        high: 0.3
+        log: true
+
+  - name: logreg_default
+    model_family: logistic_regression
+    params:
+      C:
+        low: 0.01
+        high: 10.0
+        log: true
+
+  - name: svm_default
+    model_family: svm
+    params:
+      C:
+        low: 0.1
+        high: 10.0
+      kernel:
+        choices: [linear, rbf]

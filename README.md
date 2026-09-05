@@ -89,6 +89,9 @@ Document the commands used to run training, ingestion, or the main pipeline, e.g
 ```bash
 # Phase 1: load a preprocessing search space from YAML and print a summary
 python -m src.main show-preprocessing --config configs/preprocessing_search_space.yaml
+
+# Phase 1: load a model search space (>=3 model families) and print a summary
+python -m src.main show-models --config configs/model_search_space.yaml
 ```
 
 ## 10. Evaluation
